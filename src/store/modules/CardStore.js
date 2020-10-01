@@ -33,11 +33,20 @@ const mutations = {
   },
   setList(state, list) {
     state.list = list;
+  },
+  removeItem(state, item) {
+    const index = state.list.findIndex(i => i.id === item.id);
+    if (index > -1) {
+      state.list.splice(index, 1);
+    }
   }
 };
 const actions = {
   createItem({ commit }, item) {
     commit("createItem", item);
+  },
+  removeItem({ commit }, item) {
+    commit("removeItem", item);
   },
   updateItem({ commit }, item) {
     commit("updateItem", item);

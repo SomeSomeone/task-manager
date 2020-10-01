@@ -1,5 +1,9 @@
 <template>
   <div class="card">
+    <span
+      class="card-remove mdi mdi-trash-can-outline"
+      v-on:click="removeCard"
+    ></span>
     <input
       type="range"
       class="card-slider"
@@ -70,6 +74,9 @@ export default {
     },
     updateItem(item) {
       this.$store.dispatch("CardStore/updateItem", item);
+    },
+    removeCard() {
+      this.$store.dispatch("CardStore/removeItem", this.card);
     }
   },
   watch: {
@@ -91,8 +98,9 @@ export default {
 
 <style lang="sass" scoped>
 .card
+  position: relative
   background: #eee
-  padding: 10px
+  padding: 30px 10px 10px 10px
   .task-new
     background: #60ff9c
     font-size: 16px
@@ -117,7 +125,11 @@ export default {
   .card-input
     width: 100%
   .card-slider
-      overflow: hidden
-      width: 100%
-      -webkit-appearance: none
+    overflow: hidden
+    width: 100%
+    -webkit-appearance: none
+  .card-remove
+    position: absolute
+    top: 5px
+    right: 5px
 </style>
